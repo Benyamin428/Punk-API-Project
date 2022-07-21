@@ -1,8 +1,13 @@
 import Card from "./../Card/Card";
+import "./CardList.scss";
 
 const CardList = () => {
     return (
-        <Card />
+        <div className="cardList">
+            <Card />
+            <Card />
+            <Card />
+        </div>
     );
 }
 

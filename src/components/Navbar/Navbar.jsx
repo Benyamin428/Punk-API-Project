@@ -3,10 +3,10 @@ import FiltersList from "../FiltersList/FiltersList";
 
 const Navbar = () => {
     return (
-        <>
+        <div className="navbar">
             <SearchBox />
             <FiltersList />   
-        </>
+        </div>
     );
 }
 

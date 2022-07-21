@@ -1,7 +1,7 @@
 const FilterItem = ({id, text}) => {
     return (
         <>        
-            <label for={id}>{text}</label>
+            <label htmlFor={id}>{text}</label>
             <input type="checkbox" id={id} />
         </>
     );

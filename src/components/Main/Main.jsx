@@ -2,7 +2,9 @@ import CardList from "./../CardList/CardList";
 
 const Main = () => {
     return (
-        <CardList />
+        <div className="main">
+            <CardList />
+        </div>
     );
 }
 
