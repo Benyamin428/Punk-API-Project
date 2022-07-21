@@ -1,8 +1,10 @@
-const Card = () => {
+const Card = ({image, name, description}) => {
+
     return (
         <div className="card">
-            <h2 className="card__title">Best Beer</h2>
-            <p className="card__text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam, iure officia aperiam ut mollitia beatae magnam.</p>
+            <img src={image} alt={name} className="card__image" />
+            <h2 className="card__title">{name}</h2>
+            <p className="card__text">{description}</p>
         </div>
     );
 }
