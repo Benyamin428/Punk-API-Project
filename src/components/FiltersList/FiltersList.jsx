@@ -1,16 +1,34 @@
 import FilterItem from "./../FilterItem/FilterItem";
+import {useState, useEffect} from "react";
 
-const FiltersList = () => {
+const FiltersList = ({handleCheckbox}) => {
+
+    const [checkedValues, setCheckedValues] = useState([]);
+
+    const checkFilter = (event) => {
+        if (event.target.checked == true) {
+            setCheckedValues([...checkedValues, event.target.id]);
+        }
+        else {
+            setCheckedValues(checkedValues.filter(checked => !checked.includes(event.target.id)));
+        }
+    }
+
+    useEffect(() => {
+        console.log(checkedValues)
+        handleCheckbox(checkedValues);
+    }, [checkedValues]);
+
     return (
         <ul>
             <li>
-                <FilterItem id="HighAlcohol" text="High ABV (> 6.0%)" />
+                <FilterItem checkFilter={checkFilter} id="HighAlcohol" text="High ABV (> 6.0%)" />
             </li>
             <li>
-                <FilterItem id="ClassicRange" text="Classic Range" />
+                <FilterItem checkFilter={checkFilter} id="ClassicRange" text="Classic Range" />
             </li>
             <li>
-                <FilterItem id="HighAcidity" text="Acidic (ph < 4)" />
+                <FilterItem checkFilter={checkFilter} id="HighAcidity" text="Acidic (ph < 4)" />
             </li>
         </ul>
     );

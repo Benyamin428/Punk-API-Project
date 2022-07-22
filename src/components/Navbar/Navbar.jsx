@@ -1,11 +1,11 @@
 import SearchBox from "../SearchBox/SearchBox";
 import FiltersList from "../FiltersList/FiltersList";
 
-const Navbar = () => {
+const Navbar = ({handleSearch, handleCheckbox}) => {
     return (
         <div className="navbar">
-            <SearchBox />
-            <FiltersList />   
+            <SearchBox handleSearch={handleSearch} />
+            <FiltersList handleCheckbox={handleCheckbox} />   
         </div>
     );
 }

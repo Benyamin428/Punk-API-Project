@@ -1,6 +1,6 @@
-const SearchBox = () => {
+const SearchBox = ({handleSearch}) => {
     return (
-        <input type="text"></input>
+        <input onChange={handleSearch} type="text"></input>
     );
 }
 

@@ -1,3 +1,5 @@
+import "./Card.scss";
+
 const Card = ({image, name, description}) => {
 
     return (

@@ -1,8 +1,8 @@
-const FilterItem = ({id, text}) => {
+const FilterItem = ({checkFilter, id, text}) => {
     return (
         <>        
             <label htmlFor={id}>{text}</label>
-            <input type="checkbox" id={id} />
+            <input onClick={checkFilter} type="checkbox" id={id} />
         </>
     );
 }
