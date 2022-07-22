@@ -1,20 +1,24 @@
 import "./App.scss";
 import Navbar from "./components/Navbar/Navbar";
 import Main from "./components/Main/Main";
-import beers from "./data/beers";
-import {useState} from "react";
+//import beers from "./data/beers";
+import {useState, useEffect} from "react";
 
 const App = () => {
 
-  //const getBeers = async () => {
-  //  const response = await fetch("https://api.punkapi.com/v2/beers");
-  //  const beers = await response.json();
-  //  return beers;
-  //}
-//
-  //console.log(getBeers());
+  const [beers, setBeers] = useState([]);
+  const [filteredBeers, setFilteredBeers] = useState([]);
 
-  const [filteredBeers, setFilteredBeers] = useState(beers);
+  useEffect(() => {
+    fetch("https://api.punkapi.com/v2/beers")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setBeers(result);
+          setFilteredBeers(result);
+        }
+      )
+  }, [])
 
   const handleSearch = (event) => {
     const filteredBeersList = beers.filter(beer => {
