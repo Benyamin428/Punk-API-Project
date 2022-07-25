@@ -1,4 +1,5 @@
 import CardList from "./../CardList/CardList";
+import "./Main.scss";
 
 const Main = ({beers}) => {
 

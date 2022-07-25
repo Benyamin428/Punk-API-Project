@@ -1,4 +1,5 @@
 import FilterItem from "./../FilterItem/FilterItem";
+import "./FiltersList.scss";
 import {useState, useEffect} from "react";
 
 const FiltersList = ({handleCheckbox}) => {
@@ -20,17 +21,20 @@ const FiltersList = ({handleCheckbox}) => {
     }, [checkedValues]);
 
     return (
-        <ul>
-            <li>
-                <FilterItem checkFilter={checkFilter} id="HighAlcohol" text="High ABV (> 6.0%)" />
-            </li>
-            <li>
-                <FilterItem checkFilter={checkFilter} id="ClassicRange" text="Classic Range" />
-            </li>
-            <li>
-                <FilterItem checkFilter={checkFilter} id="HighAcidity" text="Acidic (ph < 4)" />
-            </li>
-        </ul>
+        <>
+            <p>Filter By:</p>
+            <ul className="filtersList">
+                <li className="filtersList-item">
+                    <FilterItem checkFilter={checkFilter} id="HighAlcohol" text="High ABV (> 6.0%)" />
+                </li>
+                <li className="filtersList-item">
+                    <FilterItem checkFilter={checkFilter} id="ClassicRange" text="Classic Range" />
+                </li>
+                <li className="filtersList-item">
+                    <FilterItem checkFilter={checkFilter} id="HighAcidity" text="Acidic (ph < 4)" />
+                </li>
+            </ul>
+        </>
     );
 }
 
