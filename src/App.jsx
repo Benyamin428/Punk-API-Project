@@ -20,12 +20,23 @@ const App = () => {
       )
   }, [])
 
-  const handleSearch = (event) => {
-    const filteredBeersList = beers.filter(beer => {
-      if (beer.name.toLowerCase().includes(event.target.value.toLowerCase())) return beer;
-    })
-    setFilteredBeers(filteredBeersList);
+  const handleSearch = async (event) => {
+    if (event.target.value != "") {
+      const response = await fetch(`https://api.punkapi.com/v2/beers?beer_name=${event.target.value}`);
+      const beerQuery = await response.json();
+      setFilteredBeers(beerQuery);
+    }
+    else {
+      setFilteredBeers(beers);
+    }
   }
+
+  //const handleSearch = (event) => {
+  //  const filteredBeersList = beers.filter(beer => {
+  //    if (beer.name.toLowerCase().includes(event.target.value.toLowerCase())) return beer;
+  //  })
+  //  setFilteredBeers(filteredBeersList);
+  //}
 
   const handleCheckbox = (checkedValues) => {
     setFilteredBeers(beers);
