@@ -1,37 +1,22 @@
 import FilterItem from "./../FilterItem/FilterItem";
 import "./FiltersList.scss";
-import {useState, useEffect} from "react";
 
-const FiltersList = ({handleCheckbox}) => {
+const FiltersList = ({handleAbvCheckbox, handleBrewedCheckbox}) => {
 
-    const [checkedValues, setCheckedValues] = useState([]);
-
-    const checkFilter = (event) => {
-        if (event.target.checked == true) {
-            setCheckedValues([...checkedValues, event.target.id]);
-        }
-        else {
-            setCheckedValues(checkedValues.filter(checked => !checked.includes(event.target.id)));
-        }
+    const handleCheckbox = (event) => {
+        if (event.target.id == "HighAlcohol") handleAbvCheckbox(event);
+        else if (event.target.id == "ClassicRange") handleBrewedCheckbox(event);
     }
-
-    useEffect(() => {
-        console.log(checkedValues)
-        handleCheckbox(checkedValues);
-    }, [checkedValues]);
 
     return (
         <>
             <p>Filter By:</p>
             <ul className="filtersList">
                 <li className="filtersList-item">
-                    <FilterItem checkFilter={checkFilter} id="HighAlcohol" text="High ABV (> 6.0%)" />
+                    <FilterItem handleCheckbox={handleCheckbox} id="HighAlcohol" text="High ABV (> 6.0%)" />
                 </li>
                 <li className="filtersList-item">
-                    <FilterItem checkFilter={checkFilter} id="ClassicRange" text="Classic Range" />
-                </li>
-                <li className="filtersList-item">
-                    <FilterItem checkFilter={checkFilter} id="HighAcidity" text="Acidic (ph < 4)" />
+                    <FilterItem handleCheckbox={handleCheckbox} id="ClassicRange" text="Classic Range" />
                 </li>
             </ul>
         </>

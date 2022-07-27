@@ -7,58 +7,43 @@ import {useState, useEffect} from "react";
 const App = () => {
 
   const [beers, setBeers] = useState([]);
-  const [filteredBeers, setFilteredBeers] = useState([]);
+  const [searchBeer, setSearchBeer] = useState("");
+  const [abv, setAbv] = useState("");
+  const [brewed, setBrewed] = useState("");
+
+  const fetchBeers = async () => {
+    const response = await fetch(`https://api.punkapi.com/v2/beers?${searchBeer}&${abv}&${brewed}`);
+    const beerData = await response.json();
+
+    setBeers(beerData)
+  }
 
   useEffect(() => {
-    fetch("https://api.punkapi.com/v2/beers")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setBeers(result);
-          setFilteredBeers(result);
-        }
-      )
-  }, [])
+    fetchBeers();
+    console.log()
+  }, [searchBeer, abv, brewed])
 
-  const handleSearch = async (event) => {
-    if (event.target.value != "") {
-      const response = await fetch(`https://api.punkapi.com/v2/beers?beer_name=${event.target.value}`);
-      const beerQuery = await response.json();
-      setFilteredBeers(beerQuery);
-    }
-    else {
-      setFilteredBeers(beers);
-    }
-  }
+const handleSearch = (event) => {
+  if (event.target.value != "") setSearchBeer(`beer_name=${event.target.value}`);
+  else setSearchBeer("");
+}
 
-  //const handleSearch = (event) => {
-  //  const filteredBeersList = beers.filter(beer => {
-  //    if (beer.name.toLowerCase().includes(event.target.value.toLowerCase())) return beer;
-  //  })
-  //  setFilteredBeers(filteredBeersList);
-  //}
+const handleAbvCheckbox = (event) => {
+  if (event.target.checked == true) setAbv("abv_gt=6");
+  else setAbv("");
+}
 
-  const handleCheckbox = (checkedValues) => {
-    setFilteredBeers(beers);
-    let newFilteredBeers = [...beers];
-    checkedValues.forEach(checked => {
-      if (checked == "HighAlcohol") {
-        newFilteredBeers = newFilteredBeers.filter(beer => beer.abv>=6);
-      }
-      if (checked == "ClassicRange") {
-        newFilteredBeers = newFilteredBeers.filter(beer => parseInt(beer.first_brewed.slice(3))<2010);
-      }
-      if (checked == "HighAcidity") {
-        newFilteredBeers = newFilteredBeers.filter(beer => beer.ph < 4);
-      }
-    })
-    setFilteredBeers(newFilteredBeers);
-  }
+const handleBrewedCheckbox = (event) => {
+  if (event.target.checked == true) setBrewed("brewed_before=01/2010");
+  else setBrewed("");
+}
+
+
 
   return (
     <div className="container">
-      <Navbar handleSearch={handleSearch} handleCheckbox={handleCheckbox} />
-      <Main beers={filteredBeers}/>
+      <Navbar handleSearch={handleSearch} handleAbvCheckbox={handleAbvCheckbox} handleBrewedCheckbox={handleBrewedCheckbox}/>
+      <Main beers={beers}/>
     </div>
   );
 } 
