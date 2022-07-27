@@ -2,12 +2,12 @@ import SearchBox from "../SearchBox/SearchBox";
 import FiltersList from "../FiltersList/FiltersList";
 import "./Navbar.scss";
 
-const Navbar = ({handleSearch, handleAbvCheckbox, handleBrewedCheckbox}) => {
+const Navbar = ({handleSearch, handleAbvCheckbox, handleBrewedCheckbox, handlePhCheckbox}) => {
     return (
         <div className="navbar">
             <h3>Search for beer: </h3>
             <SearchBox handleSearch={handleSearch} />
-            <FiltersList handleAbvCheckbox={handleAbvCheckbox} handleBrewedCheckbox={handleBrewedCheckbox} />   
+            <FiltersList handleAbvCheckbox={handleAbvCheckbox} handleBrewedCheckbox={handleBrewedCheckbox} handlePhCheckbox={handlePhCheckbox} />   
         </div>
     );
 }

@@ -10,18 +10,28 @@ const App = () => {
   const [searchBeer, setSearchBeer] = useState("");
   const [abv, setAbv] = useState("");
   const [brewed, setBrewed] = useState("");
+  const [ph, setPh] = useState(false);
 
   const fetchBeers = async () => {
-    const response = await fetch(`https://api.punkapi.com/v2/beers?${searchBeer}&${abv}&${brewed}`);
-    const beerData = await response.json();
 
-    setBeers(beerData)
+    try {
+      const response = await fetch(`https://api.punkapi.com/v2/beers?${searchBeer}&${abv}&${brewed}`);
+
+      if (response.status != 200) throw new Error("Cannot connect to API")
+
+      const beerData = await response.json();
+  
+      if (ph == true) setBeers(beerData.filter(beer => beer.ph < 4))
+      else setBeers(beerData)
+    }
+    catch(error) {
+      alert(error.message);
+    }
   }
 
   useEffect(() => {
     fetchBeers();
-    console.log()
-  }, [searchBeer, abv, brewed])
+  }, [searchBeer, abv, brewed, ph])
 
 const handleSearch = (event) => {
   if (event.target.value != "") setSearchBeer(`beer_name=${event.target.value}`);
@@ -38,11 +48,14 @@ const handleBrewedCheckbox = (event) => {
   else setBrewed("");
 }
 
-
+const handlePhCheckbox = (event) => {
+  if (event.target.checked == true) setPh(true);
+  else setPh(false);
+}
 
   return (
     <div className="container">
-      <Navbar handleSearch={handleSearch} handleAbvCheckbox={handleAbvCheckbox} handleBrewedCheckbox={handleBrewedCheckbox}/>
+      <Navbar handleSearch={handleSearch} handleAbvCheckbox={handleAbvCheckbox} handleBrewedCheckbox={handleBrewedCheckbox} handlePhCheckbox={handlePhCheckbox} />
       <Main beers={beers}/>
     </div>
   );
