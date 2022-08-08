@@ -4,9 +4,9 @@ import "./Main.scss";
 const Main = ({beers}) => {
 
     return (
-        <div className="main">
+        <main className="main">
             <CardList beers={beers}/>
-        </div>
+        </main>
     );
 }
 

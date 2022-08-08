@@ -16,9 +16,9 @@ const CardList = ({beers}) => {
     })
 
     return (
-        <div className="cardList">
+        <section className="cardList">
             {beerCards}
-        </div>
+        </section>
     );
 }
 
