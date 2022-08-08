@@ -1,6 +1,6 @@
 import "./App.scss";
-import Navbar from "./components/Navbar/Navbar";
-import Main from "./components/Main/Main";
+import Navbar from "./containers/Navbar/Navbar";
+import Main from "./containers/Main/Main";
 //import beers from "./data/beers";
 import {useState, useEffect} from "react";
 
