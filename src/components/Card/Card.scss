@@ -10,11 +10,15 @@
         align-items: center;
         text-align: center;
         overflow-y: scroll;
-        scrollbar-width: none;
         padding: 1rem;
 
         &::-webkit-scrollbar { 
-            display: none; 
+            width: 1px;
+        }
+           
+        &::-webkit-scrollbar-thumb {
+            background-color: #000;
+            outline: 1px solid #000;
         }
         
         .card__image {
