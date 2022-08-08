@@ -34,23 +34,35 @@ const App = () => {
   }, [searchBeer, abv, brewed, ph])
 
 const handleSearch = (event) => {
-  if (event.target.value != "") setSearchBeer(`beer_name=${event.target.value}`);
-  else setSearchBeer("");
+  if (event.target.value != "") {
+    setSearchBeer(`beer_name=${event.target.value}`);
+    return;
+  } 
+  setSearchBeer("");
 }
 
 const handleAbvCheckbox = (event) => {
-  if (event.target.checked == true) setAbv("abv_gt=6");
-  else setAbv("");
+  if (event.target.checked == true) {
+    setAbv("abv_gt=6");
+    return;
+  }
+  setAbv("");
 }
 
 const handleBrewedCheckbox = (event) => {
-  if (event.target.checked == true) setBrewed("brewed_before=01/2010");
-  else setBrewed("");
+  if (event.target.checked == true) {
+    setBrewed("brewed_before=01/2010");
+    return;
+  }
+  setBrewed("");
 }
 
 const handlePhCheckbox = (event) => {
-  if (event.target.checked == true) setPh(true);
-  else setPh(false);
+  if (event.target.checked == true) {
+    setPh(true);
+    return;
+  }
+  setPh(false);
 }
 
   return (
